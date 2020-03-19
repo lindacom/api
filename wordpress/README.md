@@ -13,4 +13,6 @@ Nb. to view categories you need to enter the cateory id ?categories=3.  You can 
 
 Nb. to view pages, media etc. replace posts in the url with the required data type.
 
-1. button click to insert posts using Javascript and the api. (main.js
+1. button click to insert posts using Javascript and the api. (main.js)
+2. On click funcyion to send a GET request
+3. insert response data into a div
