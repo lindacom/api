@@ -2,7 +2,7 @@ The advantage of the wordpress api is that you can perform CRUD operations from 
 
 Using wordpress as the database.
 
-View the wordpress api
+Read - View the wordpress api
 ======================
 
 At the end of your blog url enter /wp-json/wp/v2/posts to view a json of last ten posts. slug means the shorthand url
@@ -16,3 +16,6 @@ Nb. to view pages, media etc. replace posts in the url with the required data ty
 1. button click to insert posts using Javascript and the api. (main.js)
 2. On click funcyion to send a GET request
 3. insert response data into a div
+
+Create - post to WordPress using the API
+========================================
