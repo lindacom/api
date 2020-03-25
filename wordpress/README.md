@@ -2,6 +2,11 @@ The advantage of the wordpress api is that you can perform CRUD operations from 
 
 Using wordpress as the database.
 
+Routes and endpoints
+=====================
+
+API’s index by making a GET request to https://ourawesomesite.com/wp-json/. The index provides information regarding what routes are available 
+
 Read - View the wordpress api
 ======================
 
