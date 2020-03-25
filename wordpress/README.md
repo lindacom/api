@@ -23,7 +23,7 @@ Return JSON response from AJAX using jQuery and PHP
 ```
 
 $( document ).ready(function() {
-  var api_url = 'http://lindacom.infinityfreeapp.com/wordpress/wp-json/wp/v2/posts'
+  var api_url = 'http://example.com/wordpress/wp-json/wp/v2/posts'
  $.ajax({
         url: api_url,
         contentType: "application/json",
