@@ -9,6 +9,24 @@ Routes and endpoints
 
 API’s index by making a GET request to https://ourawesomesite.com/wp-json/. The index provides information regarding what routes are available 
 
+Query parameters
+=================
+
+Results returned
+-----------------
+
+add ?per_page=1 to url to specify how many results per page, ?offset=6 to specify start position of posts returned
+
+Number of records
+------------------
+
+X-WP-Total: the total number of records in the collection and X-WP-TotalPages: the total number of pages encompassing all available records
+
+Sorting
+------
+
+?order=asc order posts ascending ?orderby=date other options are “relevance,” “id,” “include,” “title,” and “slug”
+
 Read - View the wordpress api
 ======================
 
