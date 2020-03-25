@@ -17,5 +17,40 @@ Nb. to view pages, media etc. replace posts in the url with the required data ty
 2. On click funcyion to send a GET request
 3. insert response data into a div
 
+Return JSON response from AJAX using jQuery and PHP
+===================================================
+
+$( document ).ready(function() {
+  var api_url = 'http://lindacom.infinityfreeapp.com/wordpress/wp-json/wp/v2/posts'
+ $.ajax({
+        url: api_url,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function(response){
+            var len = response.length;
+            for(var i=0; i<len; i++){
+                var id = response[i].id;
+                var date = response[i].date;
+                var slug = response[i].slug;
+                var excerpt = response[i].excerpt.rendered;
+                
+                
+
+                var tr_str = "<tr>" +
+                    "<td align='center'>" + (i+1) + "</td>" +
+                    "<td align='center'>" + date + "</td>" +
+                    "<td align='center'>" + slug + "</td>" +
+                    "<td align='center'>" + excerpt + "</td>" +
+                    
+                    
+                    "</tr>";
+
+                $("#results").append(tr_str);       
+                
+        }    
+        } 
+    });
+ });
+
 Create - post to WordPress using the API
 ========================================
