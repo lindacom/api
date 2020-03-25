@@ -1,5 +1,7 @@
 The advantage of the wordpress api is that you can perform CRUD operations from anywhere you don't always have to navigate to the dashboard.
 
+Read more here https://developer.wordpress.org/rest-api/
+
 Using wordpress as the database.
 
 Routes and endpoints
