@@ -20,6 +20,8 @@ Nb. to view pages, media etc. replace posts in the url with the required data ty
 Return JSON response from AJAX using jQuery and PHP
 ===================================================
 
+```
+
 $( document ).ready(function() {
   var api_url = 'http://lindacom.infinityfreeapp.com/wordpress/wp-json/wp/v2/posts'
  $.ajax({
@@ -52,5 +54,6 @@ $( document ).ready(function() {
     });
  });
 
+```
 Create - post to WordPress using the API
 ========================================
