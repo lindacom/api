@@ -107,5 +107,5 @@ define('JWT_AUTH_CORS_ENABLE', true);
 
 ```
 
-3. request a token to the Wordpress API: http://example.com/wp-json/jwt-auth/v1/token
-4. make an authenticated request
+3. request a token to the Wordpress API: http://example.com/wp-json/jwt-auth/v1/token in POSTMAN to test the POST request
+4. make an authenticated request using JQuery AJAX
