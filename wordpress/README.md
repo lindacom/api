@@ -82,3 +82,30 @@ $( document ).ready(function() {
 ```
 Create - post to WordPress using the API
 ========================================
+
+Make JWT-authenticated requests to the Wordpress API
+-----------------------------------------------------
+Some requests (mainly, POST requests) must be authenticated.
+
+1. To use JWT authentication with Wordpress, we first need to install the JWT Authentication for WP REST API plugin
+2. modify some core Wordpress files
+
+In the .htaccess file included in the Wordpress installation's root folder, we need to add the following lines:
+
+```
+RewriteEngine on
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]
+
+```
+
+In the wp-config.php file, also included in the Wordpress installation's root folder, we need to add these lines:
+
+```
+define('JWT_AUTH_SECRET_KEY', 'your-top-secret-key'); // Replace 'your-top-secret-key' with an actual secret key.
+define('JWT_AUTH_CORS_ENABLE', true);
+
+```
+
+3. request a token to the Wordpress API: http://example.com/wp-json/jwt-auth/v1/token
+4. make an authenticated request
