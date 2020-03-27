@@ -1,7 +1,7 @@
 <h2>Project</h2>
 
 Create web pages and make various AJAX calls to the WordPress REST API
-```
+
 <ul>
  <p><strong>Landing page</strong></p>
  <li>display all posts  category </li>
@@ -26,4 +26,4 @@ Create web pages and make various AJAX calls to the WordPress REST API
 <li>POST upload media /media/new</li>
 <li>GET /batch/	Run several GET endpoints and return them as an array.</li>
 </ul>
-```
+
