@@ -25,12 +25,10 @@ function myFetchPosts(page) {
 
 var page = 1;
 
-var $title = $('#title');
-var $content = $('#content');
-   
+  
     // used a template literal to add the page parameter
 
-    var api_url = `http://lindacom.infinityfreeapp.com/wordpress/wp-json/wp/v2/posts?per_page=1&page=${page}`;
+    var api_url = `/wordpress/wp-json/wp/v2/posts?per_page=1&page=${page}`;
 
 
 
@@ -56,7 +54,7 @@ var $content = $('#content');
                      '<p>' + excerpt + '</p>' +
                      '<h4>' +  date + '</h4>' +
                      '<h4>' + 'Category:' + categories + '</h4>' +
-                    '<a href="http://lindacom.infinityfreeapp.com/api-posts.php?">'+ 
+                    '<a href="#">'+ 
                     '<input type="button" value="read more">' + '</input>' +
                     ' </a>' +
                     ' </div>' +
