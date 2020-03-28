@@ -1,0 +1,84 @@
+<!-- LISTING OF POSTS -->
+<h2>Coaching blog posts</h2>
+
+<table id='results' class='stack'>
+
+</table>
+
+<script>
+
+//  FUNCTIONS TO RUN ON PAGE LOAD - fetch posts, fetch categories
+
+$( document ).ready(function() {
+    myFetchPosts(1)
+    load_categories()
+    load_authors()
+
+    }); //end of document ready function
+
+// var page = 1;
+
+// 1. LISTING OF POSTS - API call - reusable function
+function myFetchPosts(page) {
+
+    // start with page 1
+
+var page = 1;
+
+var $title = $('#title');
+var $content = $('#content');
+   
+    // used a template literal to add the page parameter
+
+    var api_url = `http://lindacom.infinityfreeapp.com/wordpress/wp-json/wp/v2/posts?per_page=1&page=${page}`;
+
+
+
+    $.ajax({
+            url: api_url,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(response){
+                var len = response.length;
+                for(var i=0; i<len; i++){
+                    var id = response[i].id;
+                    var date = response[i].date_gmt;
+                    var slug = response[i].slug;
+                    var excerpt = response[i].excerpt.rendered;
+                    var categories = response[i].categories;
+
+                    var tr_str =
+                     '<td>'+
+                    '<div class="card" style="width: 300px;">' +
+                     '<div class="card-divider">' + (i+1) + ' ' + slug + '</div>' +    
+                    '<img src="http://lindacom.infinityfreeapp.com/images/model.jpg">' +
+                    ' <div class="card-section">' +   
+                     '<p>' + excerpt + '</p>' +
+                     '<h4>' +  date + '</h4>' +
+                     '<h4>' + 'Category:' + categories + '</h4>' +
+                    '<a href="http://lindacom.infinityfreeapp.com/api-posts.php?">'+ 
+                    '<input type="button" value="read more">' + '</input>' +
+                    ' </a>' +
+                    ' </div>' +
+                     '</div>'+
+                       '</td>'           
+                        ;
+
+                    $("#results").append(tr_str);   
+
+                    // increment page so the next time this is called it will fetch the next page
+                page += 1;    
+
+            } // end of for loop
+           
+                   } // end of success    
+
+        
+                   
+    }); // end of ajax call
+    
+} // end of fetch posts function
+
+
+    // call our function onload - remove this not sure if needed.
+  // myFetchPosts(page);
