@@ -9,3 +9,34 @@
            <li id="dynamic_categories"></li>
            
            </ul>
+           
+           // 2. LISTING OF CATEGORIES 
+
+  function load_categories()
+    {
+
+        var api_url_cat = `/wordpress/wp-json/wp/v2/categories`;
+        target =  $('#category_list');
+       
+
+      $.ajax({
+        url:api_url_cat,
+          contentType: "application/json",
+            dataType: 'json',
+            success: function(response){
+var len = response.length;
+                for(var i=0; i<len; i++){
+                    var name = response[i].name;
+                    var tr_str =
+                     '<li>'+                     
+                      name +                    
+                       '</li>'           
+                        ;                  
+       
+          $('#dynamic_categories').append(tr_str); //add to filters panel category list
+           
+           $('<option value="">' + tr_str + '</option>').appendTo(target); //add to category dropdown list
+        }
+            }
+      });
+    }
