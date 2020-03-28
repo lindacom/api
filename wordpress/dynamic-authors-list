@@ -4,3 +4,29 @@
            <li id="dynamic_authors"></li>
            
            </ul>
+           
+           //  LIST AUTHORS
+
+    
+    function load_authors()
+    {
+
+        var api_url_authors =`/wordpress/wp-json/wp/v2/users`;
+
+      $.ajax({
+        url:api_url_authors,
+       dataType: 'json',
+            success: function(response){
+                var len = response.length;
+                for(var i=0; i<len; i++){
+                    var name = response[i].name;
+                    var tr_str =
+                     '<li>'+                     
+                     '<p>' + name + '</p>' +                    
+                       '</li>'           
+                        ; 
+          $('#dynamic_authors').append(tr_str);
+        }
+            }
+      });
+    }
