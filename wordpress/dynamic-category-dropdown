@@ -1,0 +1,4 @@
+<h4>Select category</h4>
+     <select name="category_list" id="category_list" class="form-control">
+      <option value="">Select Category</option>
+          </select>
