@@ -1,0 +1,94 @@
+<!-- CATEGORY LINKS -->
+<h4>Category</h4>
+        <ul class="categories-menu menu vertical nested is-active">
+           <a href="javascript:void(0)" class="clear-all" id="category-clear-all" onClick="window.location.reload();">Clear All</a> 
+           <li id="dynamic_categories"></li> //lists categories from the load categories function
+           
+           </ul>
+           
+  <!-- FETCH CATEGORIES  -->
+
+  function load_categories()
+    {
+
+        var api_url_cat = `http://example.com/wordpress/wp-json/wp/v2/categories`;
+        target =  $('#category_list');
+       
+
+      $.ajax({
+        url:api_url_cat,
+          contentType: "application/json",
+            dataType: 'json',
+            success: function(response){
+var len = response.length;
+                for(var i=0; i<len; i++){
+                     var id = response[i].id;
+                    var name = response[i].name;
+                    var tr_str =
+                     '<li>'+                     
+                     '<a href="#'+ name + ' " onclick="myFetchPostsByCategory('+ id +')">' + name + '</a>' +     
+                     
+                     //on click runs myfetchpostsby category passing in the category id               
+                       '</li>'           
+                        ;                  
+      
+
+          $('#dynamic_categories').append(tr_str); //add to filters panel category list
+           $('<option value=" ">'  + tr_str + '</option>').appendTo(target); // also adds items to category dropdown list
+        }
+            }
+      });
+    }
+    
+    <!-- FETCH POSTS BY CATEGORY SELECTED -->
+
+     function myFetchPostsByCategory(id) {
+         var id = id;
+
+       // used a template literal to add the page parameter
+
+    var api_url_cat = `http://example.com/wordpress/wp-json/wp/v2/posts?categories=${id}`;
+
+
+
+    $.ajax({
+            url: api_url_cat,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(response){
+                var len = response.length;
+                for(var i=0; i<len; i++){
+                    var id = response[i].id;
+                    var date = response[i].date_gmt;
+                    var slug = response[i].slug;
+                    var excerpt = response[i].excerpt.rendered;
+                    var categories = response[i].categories;
+
+                    var cat_tr_str =
+                     '<td>'+
+                    '<div class="card" style="width: 300px;">' +
+                     '<div class="card-divider">' + (i+1) + ' ' + slug + '</div>' +    
+                    
+                    ' <div class="card-section">' +   
+                     '<p>' + excerpt + '</p>' +
+                     '<h4>' +  date + '</h4>' +
+                     '<h4>' + 'Category:' + categories + '</h4>' +
+                    '<a href="http://example.com/api-posts.php?">'+ 
+                    '<input type="button" value="read more">' + '</input>' +
+                    ' </a>' +
+                    ' </div>' +
+                     '</div>'+
+                       '</td>'           
+                        ;
+
+                    $("#results").empty().append(cat_tr_str);   //empties the existing results and appends new results
+
+                      
+
+            } // end of for loop
+           
+                   } // end of success         
+                   
+    }); // end of ajax call
+    
+} // end of fetch posts by category function
