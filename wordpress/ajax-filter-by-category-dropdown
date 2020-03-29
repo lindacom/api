@@ -1,0 +1,104 @@
+<!-- category dropdown -->
+
+
+    <h4>Select category</h4>
+
+    <form class="filter-form" action="#" method="post">
+			<select name="category_list" id="category_list" class="form-control">
+			<option value="">Choose a category...</option>
+           
+		</select>
+	</form>
+  
+  <!-- LISTING OF ALL CATEGORIES IN THE DROPDOWN -->
+
+  function load_categories()
+    {
+
+        var api_url_cat = `http://example.com/wordpress/wp-json/wp/v2/categories`;
+          
+
+      $.ajax({
+        url:api_url_cat,
+          contentType: "application/json",
+            dataType: 'json',
+            success: function(response){
+var len = response.length;
+                for(var i=0; i<len; i++){
+                     var id = response[i].id;
+                    var name = response[i].name;
+                   
+                        var tr_str_cat =   
+                        '<option value=" '+ id +' ">' + name + '</option>'        //uses value id to fetch categories      
+      
+  $('#category_list').append(tr_str_cat); //  add to category dropdown list
+
+           }
+            }
+      });
+    }
+    
+    <!-- FETCH POSTS BY CATEGORY -->
+    
+       function myFetchPostsByCategory(id) {
+         var id = id;
+
+       // used a template literal to add the page parameter
+
+    var api_url_cat = `http://example.com/wordpress/wp-json/wp/v2/posts?categories=${id}`;
+
+
+
+    $.ajax({
+            url: api_url_cat,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(response){
+                var len = response.length;
+                for(var i=0; i<len; i++){
+                    var id = response[i].id;
+                    var date = response[i].date_gmt;
+                    var slug = response[i].slug;
+                    var excerpt = response[i].excerpt.rendered;
+                    var categories = response[i].categories;
+
+                    var cat_tr_str =
+                     '<td>'+
+                    '<div class="card" style="width: 300px;">' +
+                     '<div class="card-divider">' + (i+1) + ' ' + slug + '</div>' +    
+                    
+                    ' <div class="card-section">' +   
+                     '<p>' + excerpt + '</p>' +
+                     '<h4>' +  date + '</h4>' +
+                     '<h4>' + 'Category:' + categories + '</h4>' +
+                    '<a href="http://example.com/api-posts.php?">'+ 
+                    '<input type="button" value="read more">' + '</input>' +
+                    ' </a>' +
+                    ' </div>' +
+                     '</div>'+
+                       '</td>'           
+                        ;
+
+                    $("#results").empty().append(cat_tr_str);   
+
+                      
+
+            } // end of for loop
+           
+                   } // end of success         
+                   
+    }); // end of ajax call
+    
+} // end of fetch posts by category function
+
+<!-- CATEGORY DROPDOWN ON CHANGE EVENT LISTENER-->
+
+    $('#category_list').on( 'change', function () {
+          var id = $('#category_list').val(); //takes id from dropdown value property
+         
+            		            myFetchPostsByCategory(id) //ends id to th fetchpostsbycategory function
+		
+
+	
+
+    });
