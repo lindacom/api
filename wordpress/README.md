@@ -31,17 +31,27 @@ Sorting
 Read - View the wordpress api
 ======================
 
+Posts
+------
+
 At the end of your blog url enter /wp-json/wp/v2/posts to view a json of last ten posts. slug means the shorthand url
 
 Nb. to view less posts at the end of the url enter ?per_page=2
 
+Categories
+-----------
+
 Nb. to view categories you need to enter the cateory id ?categories=3.  You can also add &per_page=1 to the url to filter this down further.
 
-Nb. to view pages, media etc. replace posts in the url with the required data type.
+Comments
+--------
 
-1. button click to insert posts using Javascript and the api. (main.js)
-2. On click funcyion to send a GET request
-3. insert response data into a div
+To view comments by post ID number (e.g. 1) use the endpoint http://example.com/wordpress/wp-json/wp/v2/comments?post=1
+
+Pages
+-----
+
+Nb. to view pages, media etc. replace posts in the url with the required data type.
 
 Return JSON response from AJAX using jQuery and PHP
 ===================================================
