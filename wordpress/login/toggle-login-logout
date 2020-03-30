@@ -1,0 +1,90 @@
+<!-- LOGIN FORM -->
+
+<h2>Login form</h2>
+
+<form name="loginform" id="loginform" style="display: none">
+<label for"uer_login">Username:
+<input type="text" id="user_login" name="username" class="input" value="" placeholder="username"></label>
+
+<label for"user_pass">Password:
+  <input type="password" id="user_pass" name="pass" class="input" value="" placeholder="Title"></label>
+
+  <button id="login_button" type="submit" class="success button"> Login</button>
+  </form>
+  
+  <div>
+  <button id="logout" class="success button" style="display: none"> Logout</button>
+        
+
+   </div>
+  
+  
+<script>
+
+//N.b for some reason this script is not working in a separate js file
+
+(function($) {
+    const RESTROOT = 'http://example.com/wordpress/wp-json';
+const $ENTRYTITLE = $('.post-title');
+const $LOGIN = $('#loginform');
+const $LOGOUT = $('#logout');
+
+
+
+//Get token using username and password input and save in a session
+
+
+function getToken(username, password) {
+
+
+    $.ajax({
+        url: RESTROOT + '/jwt-auth/v1/token',
+method: 'POST',
+data: {
+    'username': username,
+    'password': password
+
+}
+    })
+
+    .done(function(response){
+        sessionStorage.setItem('newToken', response.token); //sets the key and value in the console application > session storage
+                $LOGIN.toggle();
+        $LOGOUT.toggle();
+       
+    })
+  //  .fail(function(response) {
+//console.error("REST error");
+  //  })
+
+}
+
+// clear token from session storage function
+
+function clearToken() {
+    sessionStorage.removeItem('newToken');
+    $LOGIN.toggle();
+    $LOGOUT.toggle();
+}
+
+// Reveal login form
+
+$LOGIN.toggle();
+$('#login_button').click(function(e) {
+e.preventDefault();
+let username = document.querySelector('#user_login').value;
+let password = document.querySelector('#user_pass').value;
+
+console.info('username: ' + username + 'password:' + password);
+getToken(username, password);
+
+});
+
+//clear token from session when logout button clicked
+
+$('#logout').click(clearToken);
+
+
+
+})(jQuery);
+</script>
