@@ -1,0 +1,68 @@
+<!-- POST ID SELECT DROPDOWN -->
+
+<P>Show comments by id</p>
+<select name="comment_id_list" id="comment_id_list" class="form-control">
+      <option value="">Select id</option>
+         </select>
+
+         <!-- LISTING OF COMMENTS -->
+
+<div id='results'>
+
+</div>
+
+<!-- POST ID ON CHANGE EVENT LISTENER -->
+
+    $('#comment_id_list').on( 'change', function () {
+          var id = $('#comment_id_list').val(); //takes post id from dropdown value property
+         
+            		            myFetchCommentsId(id) // sends id to the mtfetchCommentsId function
+
+    });
+
+
+   <!-- FETCH COMMENTS BY POST ID -->
+
+ function myFetchCommentsId(id) {
+
+   var id = id;
+   
+    // used a template literal to add the page parameter
+
+    var api_url = `http://example.com/wordpress/wp-json/wp/v2/comments?per_page=3&post=${id}`;
+
+    $.ajax({
+            url: api_url,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(response){
+                var len = response.length;
+               for(var i=0; i<len; i++){
+                   var author = response[i].author_name;
+                   var date = response[i].date;
+                   var post = response[i].post;
+                    var content = response[i].content.rendered;
+
+                    var tr_str =
+                      '<p><strong>Author:</strong>' + author + '</p>' +
+                      '<p><strong>Date:</strong>' + date + '</p>' +
+                      '<p><strong>Comment for post number:</strong>' + post + '</p>' +
+                     '<p>' + content + '</p>' +
+                     '<hr />'
+                               
+                        ;
+
+                    $("#results").empty().append(tr_str);   
+
+                    // increment page so the next time this is called it will fetch the next page
+                page += 1;    
+
+            } // end of for loop
+           
+                   } // end of success    
+
+        
+                   
+    }); // end of ajax call
+    
+} // end of fetch comments by post id function
