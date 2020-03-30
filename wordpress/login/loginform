@@ -1,0 +1,19 @@
+<!-- LOGIN FORM -->
+
+<h2>Login form</h2>
+
+<form name="loginform" id="loginform" style="display: none">
+<label for"uer_login">Username:
+<input type="text" id="user_login" name="username" class="input" value="" placeholder="username"></label>
+
+<label for"user_pass">Password:
+  <input type="password" id="user_pass" name="pass" class="input" value="" placeholder="Title"></label>
+
+  <button id="login_button" type="submit" class="success button"> Login</button>
+  </form>
+  
+  <div>
+  <button id="logout" class="success button" style="display: none"> Logout</button>
+        
+
+   </div>
