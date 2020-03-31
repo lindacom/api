@@ -1,0 +1,134 @@
+Create a post using jwt authentication token from session storage
+=====================================================
+
+Toggles login and admin post form with logout button.
+
+<!-- ADD A POST FORM -->
+
+<form name="addpostform" id="addpostform" style="display: none">
+<div class="main-column">
+<div class="admin-quick-add">
+  <h3>Quick Add Post</h3>
+    <input type="text" id="title" name="title" placeholder="Title">
+  <textarea id="content" name="content" placeholder="Content"></textarea>
+ 
+ <button  id="quick-add-button" class="success button">Create Post</button>
+  <button  id="quick-add-category" class="success button">Add a category</button>
+  
+  <div>
+  <button id="logout" class="success button" style="display: none"> Logout</button>      
+
+   </div>
+</div>
+</div>
+</form>
+
+<script>
+
+// Toggle login form and logout button, get and clear authorisation token,  
+// N.b for some reason this script is not working in a separate js file
+
+(function($) {
+    const RESTROOT = 'http://example.com/wordpress/wp-json';
+$ENTRYTITLE = $('.post-title');
+const $LOGIN = $('#loginform');
+const $LOGOUT = $('#logout');
+const $POST = $('#addpostform');
+
+
+
+//Get token using username and password input and save in a session
+
+
+function getToken(username, password) {
+
+
+    $.ajax({
+        url: RESTROOT + '/jwt-auth/v1/token',
+method: 'POST',
+data: {
+    'username': username,
+    'password': password
+
+}
+    })
+
+    .done(function(response){
+        sessionStorage.setItem('newToken', response.token); //sets the key and value in the console application > session storage
+                $LOGIN.toggle();
+        $LOGOUT.toggle();
+         $POST.toggle();
+         
+    })
+}
+
+// clear token from session storage function
+
+function clearToken() {
+    sessionStorage.removeItem('newToken');
+    $LOGIN.toggle();
+    $LOGOUT.toggle();
+}
+
+// Reveal login form
+
+$LOGIN.toggle();
+$('#login_button').click(function(e) {
+e.preventDefault();
+let username = document.querySelector('#user_login').value;
+let password = document.querySelector('#user_pass').value;
+
+console.info('username: ' + username + 'password:' + password);
+getToken(username, password);
+
+});
+
+//clear token from session when logout button clicked
+
+var title = document.querySelector('#title').value;
+var content = document.querySelector('#content').value;
+
+$('#logout').click(clearToken);
+
+ $('#quick-add-button').click(function(e) {
+     e.preventDefault();
+ var title = document.querySelector('#title').value;
+var content = document.querySelector('#content').value;
+console.info('title: ' + title + 'content:' + content);
+postPost(title, content)
+});
+
+
+function postPost(title, content) {
+var title = title;
+var content = content;
+
+    $.ajax({
+        url: 'http://example.com/wordpress/wp-json/wp/v2/posts',
+method: 'POST',
+headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('newToken') }, 
+data: {
+    'title': title,
+    'content': content,
+    'status': 'publish'
+},
+       success: function(response) {
+ 
+        // Save the post ID in case you need it for something
+ 
+      var myNewPostID = response.id;
+      console.info(myNewPostID);
+     console.info('done')
+        
+ 
+    }
+});
+
+};
+
+
+})(jQuery);
+
+
+
+</script>
