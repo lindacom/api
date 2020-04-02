@@ -16,52 +16,61 @@ $( document ).ready(function() {
 
     }); //end of document ready function
 
-// var page = 1;
-
 // 1. LISTING OF POSTS - API call - reusable function
+
+
 function myFetchPosts(page) {
 
-    // start with page 1
+     
 
-var page = 1;
+//pass in the page number 
 
-  
+var page = page;
+
+   
     // used a template literal to add the page parameter
 
-    var api_url = `/wordpress/wp-json/wp/v2/posts?per_page=1&page=${page}`;
+    var api_url = `http://example.com/wordpress/wp-json/wp/v2/posts?per_page=3&page=${page}`;
 
-
+$("#results").empty();
 
     $.ajax({
             url: api_url,
-            contentType: "application/json",
+            contentType: 'application/json',
             dataType: 'json',
             success: function(response){
                 var len = response.length;
                 for(var i=0; i<len; i++){
                     var id = response[i].id;
-                    var date = response[i].date_gmt;
+                    var date = new Date(response[i].date_gmt);
                     var slug = response[i].slug;
                     var excerpt = response[i].excerpt.rendered;
                     var categories = response[i].categories;
 
                     var tr_str =
+                     
                      '<td>'+
-                    '<div class="card" style="width: 300px;">' +
-                     '<div class="card-divider">' + (i+1) + ' ' + slug + '</div>' +    
-                    '<img src="http://example.com/images/model.jpg">' +
+                    '<div class="card" style="width: 250px;">' +
+                    '<div class="card-divider">' + (id) + ' ' + slug + '</div>' +  
+                    
+                    '<img src="http://example.infinityfreeapp.com/images/model.jpg">' +
                     ' <div class="card-section">' +   
                      '<p>' + excerpt + '</p>' +
                      '<h4>' +  date + '</h4>' +
                      '<h4>' + 'Category:' + categories + '</h4>' +
-                    '<a href="#">'+ 
+                    '<a href="http://example.com/api-posts.php?">'+ 
                     '<input type="button" value="read more">' + '</input>' +
                     ' </a>' +
+                     '<i onclick="myFunction(this)" class="fa fa-thumbs-up" id="' + slug + '">' +
+                     '</i>'+
                     ' </div>' +
                      '</div>'+
-                       '</td>'           
-                        ;
+                       '</td>' 
+                        
 
+                            
+                        ;
+ 
                     $("#results").append(tr_str);   
 
                     // increment page so the next time this is called it will fetch the next page
@@ -75,8 +84,4 @@ var page = 1;
                    
     }); // end of ajax call
     
-} // end of fetch posts function
-
-
-    // call our function onload - remove this not sure if needed.
-  // myFetchPosts(page);
+} // end of fetch posts function 
