@@ -53,9 +53,11 @@ data: {
         $LOGOUT.toggle();
        
     })
-  //  .fail(function(response) {
-//console.error("REST error");
-  //  })
+      .catch((error)=>{
+                            console.log({error}); //if unsuccessful error is logged to the console
+    $('#ServerErrorDiv').append(error.responseJSON.message) //get the json error message and put it on the page (other object properties are 
+                                                              available to display instead)
+                        })
 
 }
 
