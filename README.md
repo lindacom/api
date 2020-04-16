@@ -65,7 +65,7 @@ How it works
 4. Matches nonce to records
 
 In ajax you put the nonce in the request header. WordPress example:
-
+```
 $.ajax({
   url: "test.html",
 before send: function (xhr) {
@@ -73,3 +73,5 @@ xhr.setRequestHeader('X-WP-nonce', WP Settings.nonce);
 },
 
 });
+```
+ functional testing, load testing, security testing, automation, and mocking/virtualization. 
