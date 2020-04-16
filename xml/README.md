@@ -99,6 +99,8 @@ xml web services
 ================
 Web services communicate using open protocols.
 
+WSDL - service description file in xml.
+
 SOAP
 -----
 SOAP - Simple Object Access Protocol. xml based protocol for accessing web services.  A SOAP message is an ordinary XML document containing the following elements:
