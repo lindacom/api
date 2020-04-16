@@ -101,13 +101,73 @@ Web services communicate using open protocols.
 
 SOAP
 -----
-SOAP - Simple Object Access Protocol. xml based protocol for accessing web services.  It is strucutred with:
+SOAP - Simple Object Access Protocol. xml based protocol for accessing web services.  A SOAP message is an ordinary XML document containing the following elements:
 
-<li>envelope element - identifies xm document as a soap message</li>
-<li>header element</li>
-<li>body element - call and response information</li>
-<li>fault element - errors and status information</li>
+<li>envelope element(mandatory) - identifies xm document as a soap message.Defines the start and the end of the message. It is a mandatory element.The SOAP envelope is specified using the ENV namespace prefix and the Envelope element.</li>
+<li>header element (optional) - Contains any optional attributes of the message used in processing the message (e.g. digital signature, account number). A SOAP Header can have the following two attributes Actor attribute
+The SOAP protocol defines a message path as a list of SOAP service nodes. Each of these intermediate nodes can perform some processing and then forward the message to the next node in the chain. By setting the Actor attribute, the client can specify the recipient of the SOAP header.
 
+MustUnderstand attribute
+It indicates whether a Header element is optional or mandatory. If set to true, the recipient must understand and process the Header attribute according to its defined semantics, or return a fault.</li>
+<li>body element (mandatory) -  Contains the XML data comprising the message being sent (call and response information). It is a mandatory element.</li>
+<li>fault element (optional) - errors and status information that occur while processing the message (e.g. version mismatch, information not understood, client error, server error).The SOAP fault mechanism returns specific information about the error, including a predefined code <faultCode>, a description <faultString> <detail>, and the address of the SOAP processor that generated the fault <faultActor>.</li>
+
+```
+<?xml version = "1.0"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV = "http://www.w3.org/2001/12/soap-envelope" 
+   SOAP-ENV:encodingStyle = "http://www.w3.org/2001/12/soap-encoding">
+
+   <SOAP-ENV:Header>
+       <t:Transaction 
+         xmlns:t = "http://www.tutorialspoint.com/transaction/" 
+         SOAP-ENV:mustUnderstand = "true">5
+      </t:Transaction>
+   </SOAP-ENV:Header>
+   <SOAP-ENV:Body>
+      <m:GetQuotation xmlns:m = "http://www.tp.com/Quotation">
+         <m:Item>Computers</m:Item>
+      </m:GetQuotation>
+      <SOAP-ENV:Fault>
+         ...
+         ...
+      </SOAP-ENV:Fault>
+      ...
+   </SOAP-ENV:Body>
+</SOAP_ENV:Envelope>
+```
+N.b. Normally, the application defines a schema to contain semantics associated with the request and response elements.
+
+SOAP includes a built-in set of rules for encoding data types. It enables the SOAP message to indicate specific data types, such as integers, floats, doubles, or arrays. The encoding style for a SOAP message is set via the SOAP-ENV:encodingStyle attribute.
+
+SOAP arrays have a very specific set of rules, which require that you specify both the element type and array size. To create an array, you must specify it as an xsi:type of array. The array must also include an arrayType attribute.
+
+SOAP is not tied to any transport protocol. SOAP can be transported via SMTP, FTP, IBM's MQSeries, or Microsoft Message Queuing (MSMQ).
+
+SOAP via http
+==============
+requests and responses are required to set their content type to text/xml.
+
+
+
+SOAP with http post
+--------------------
+The following example illustrates the use of a SOAP message within an HTTP POST operation, which sends the message to the server.
+The OrderEntry reference in the HTTP header is the name of the program to be invoked at the tutorialspoint.com website.
+```
+POST /OrderEntry HTTP/1.1
+Host: www.tutorialspoint.com
+Content-Type: application/soap;  charset="utf-8"
+Content-Length: nnnn
+
+<?xml version = "1.0"?>
+<SOAP-ENV:Envelope 
+   xmlns:SOAP-ENV = "http://www.w3.org/2001/12/soap-envelope" 
+   SOAP-ENV:encodingStyle = " http://www.w3.org/2001/12/soap-encoding">
+   ...
+   Message information goes here
+   ...
+</SOAP-ENV:Envelope>
+```
 Using PHP to send a SOAP request and read and xml response
 ===========================================================
 
