@@ -74,4 +74,6 @@ xhr.setRequestHeader('X-WP-nonce', WP Settings.nonce);
 
 });
 ```
+API testing
+===========
  functional testing, load testing, security testing, automation, and mocking/virtualization. 
