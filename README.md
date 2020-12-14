@@ -1,3 +1,26 @@
+Connecting to an api
+========================
+There are several ways to connect to an api
+
+1. xmlHttpRequest = create request object, open connction (get request, url), onload request function (to do something with the response (e.g. parse data, print etc), send
+request
+2. Jquery - request and load data asynchrnously. Ajax method includes url and success function. N.b. has a simplr get method which can be used. N.b. you must include jquery in the header of the page
+
+
+
+
+
+Working with JSON data
+==========================
+Json data is returned as a string. You ant to convert the string to a json object. This is known as parsing data.  To parse data use the javascript method JSON.parse()
+The method takes the response e.g. from the api. Use the dot notation to access an objects properties and methods.
+
+N.b. Json objects can sometimes be seen as an array of objects. You can access using array syntax (bracket)
+
+N.b you can use JavaScript operator called typeof to see what kind of data you are orking with
+
+N.b. you can use the json formatter chrome extension to view rawparsed data
+
 Authentication in Postman
 ==========================
 
