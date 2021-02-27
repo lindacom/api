@@ -126,9 +126,7 @@ request.onerror = function() {
 console.log('thre is a problem')
 }
 ```
-API websites
-=============
-rapidapi.com
+
 
 
 
