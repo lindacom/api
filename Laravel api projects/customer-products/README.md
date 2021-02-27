@@ -14,14 +14,26 @@ Endpoints
 http://127.0.0.1:8000/api/v1
 
 /reviews
+/customers
+/products
 
 operations
 -------------
 Reviews:
-Get reviews, get reviews by id
+Get reviews
+get reviews by id
 Create a review
 Update a review
 delete a review
+
+Customers:
+get reviews by customer
+
+products:
+get products
+create a product
+update a product
+delete a product
 
 inputs
 -------
