@@ -1,6 +1,16 @@
 Authentication
 ===============
 
+Setup
+-----
+- grant and request access to resource
+- traits for authentication
+- add authentication headers
+
+API gateway and proxy
+restrict access to an api
+SLA based policy
+
 There are various types of authentication methods. All authentication requires encryption.
 
 Security certificates
