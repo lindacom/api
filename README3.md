@@ -74,13 +74,4 @@ xhr.setRequestHeader('X-WP-nonce', WP Settings.nonce);
 
 });
 ```
-API testing
-===========
-There are various types of testing
- functional testing, load testing, security testing, automation, and mocking/virtualization. 
-Functional testing
-------------------
-field types - verification of all field types. For example, if a particular field requires an integer, then send in a string.
-required fields - verifies the usefulness of error messages 
-database integrity - corrupt data
-Scenario tests (use cases (Business driven development (BDD)))
+
