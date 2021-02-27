@@ -3,7 +3,8 @@ API design
 
 Databases 
 ----------
-1. Reviews
+1. Reviews - reviewID, customerID, bookTitle, description, likes
+2. products - productID, bookTitle, price
 
 api specification
 ------------------
