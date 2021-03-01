@@ -2,7 +2,7 @@ API development lifecycle
 =========================
 1. Design - api specification, operations, inputs and outputs
 2. Implementation - build and test, manage, secure, scale
-3. Consume - publish
+3. Consume - publish, versioning, policies, analysis, reporting, troubleshooting, scaling
 
 API documentation tools
 -------------------------
@@ -87,6 +87,12 @@ Manage access to the API and protect the quality of service via rate limiting (t
 API security
 -------------
 Establish and enforce enterprise policies for security and firewalling APIs.
+
+Making calls to an api
+=======================
+
+unsecured apis
+secured apis - oauth, saml, JWT
 
 APIs for use in development projects
 =======================================
