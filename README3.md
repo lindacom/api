@@ -57,14 +57,21 @@ CREATE TABLE dbo.reviews
  )
 
 Build the api
---------------
+==============
+Packages required are PHP and Composer.
+Open a terminal and create a Laravel project using the command composer create-projec --prefer-dist laravel/laravel projectname
+Go to the directory of the project using the cd command
+run the project using the command php artisan serve
+Open the project in a browser window
 
 In the Laravel project create the files for the api:
 
 Routes > api.php - contains the endpoint
 
+Database
+=========
 Add database credentials to a Laravel project
------------------------------------------------
+----------------------------------------------
 3. Open project folder in VS code
 4. In the Laravel project add database credentials to the .env file - host, port, database, user and password. 
 
@@ -92,7 +99,29 @@ DB_PASSWORD=laravel
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
-        ],
+ 
+],
+
+Add data to the database
+-------------------------
+
+Open SSMS
+Open a terminal and run the command php artisan migrate:fresh --seed
+
+Create the information for a database table by creating a file in database > migrations directory
+create data to be inserted into a database table by creatig a file in database > seeds directory
+Create factories in database > factories directory.
+
+Migration - versions of the database
+seeding - inserts data into the database
+
+run the command php artisan migrate:refresh
+
+Create model files using the command php artisan make:model name
+
+Seed the database by running the command php artisan db:seed
+Go to SSMS to see data has now been added to the tables
+
 
 Access the api in the browser
 --------------------------------
