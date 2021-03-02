@@ -11,12 +11,15 @@ api specification
 
 Endpoints
 ---------
+Endpoints are set up in the routes > api.php file 
 
 http://127.0.0.1:8000/api/v1
 
 /reviews
 /customers
 /products
+
+Endpoints are documeted in the api specification document http://127.0.0.1:8000/docs/
 
 operations
 -------------
