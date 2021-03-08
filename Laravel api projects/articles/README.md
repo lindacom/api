@@ -67,6 +67,11 @@ Model
 Controller
 ===========
 1. Make a controller with a resource - php artisan make:controller ArticleController --resource
+2. Go to the file in app > http > controllers
+3. Create routes in the routes > api.php file
+4. Create a resource php artisan make:resource Article
+5. View the resource in app > http > resources
+6. In the controller file use article model and article resource
 
 Documentation
 =============
