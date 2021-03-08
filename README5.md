@@ -8,7 +8,7 @@ There are various types of testing:
 - security testing
 - automation
 - mocking/virtualization. 
-- 
+
 Functional testing
 ------------------
 1. field types - verification of all field types. For example, if a particular field requires an integer, then send in a string.
@@ -19,6 +19,22 @@ Functional testing
 Testing tools
 =============
 Postman
+----------
+
+Behat
+------
+Behavioural tests
+
+1. In a Laravel api projec install behat - composer require --dev behat/behat
+2. Set up behat to run in the project - vendor/bin/behat --init
+
+feature tests wil be run in the features directory.  To manage tests (feature context):
+
+1. go to features > bootstrap > featureContext.php. Enter code. Queries api, verifies a response and that response is json.  Insert bearer token to authenticate
+to api
+2. Create a test file in the features directory. Enter code
+3. Start the appliation
+4. run vendor/bin/behat to run tests
 
 Errors and exceptions
 ----------------------
@@ -44,5 +60,11 @@ In the api.php file the Rout::any() allows for dealing with any request at this 
 In the controller file create a method for errors nd return a response e.g.
 
 return response()->json(['msg' => 'payment is required'], 501);
+
+To learn
+===========
+Laravel passport
+guzzle
+behat
 
 
