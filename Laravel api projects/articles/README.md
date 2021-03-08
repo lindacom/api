@@ -1,0 +1,75 @@
+
+1. Open visual studio code and open the folder
+2. Create a project - Open a terminal and enter the command composer create-project --prefer-dist laravel/laravel articles
+
+Database
+----------
+
+1. Open SSMS and expand LaravelDatabase
+2. In visual studio code go to config > database and set the default to sqlsrv
+3. go to .env file and enter database credentials for sqlsrv
+4. create an articles table using the command php artisan make:migration create_articles_table --create=articles
+5. Go to database > migrations to see the migration file which has the default id and timestamp fields.
+6. Add further fields to the file
+7. Create articles table seeder - php artisan make:seeder ArticlesTableSeeder.  Go to the file in the database > seeders folder and in the run function 
+specify the number of articles you want to create:
+
+factory(App\Article::class, 30)->create();
+
+6. In the run function of the database seeder file enter  $this->call(ArticlesTableSeeder::class);
+7. Create a factory for articles - php artisan make:factory ArticleFactory
+8. Go to the file in database > factories to format data
+
+```
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Article;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+
+class ArticleFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Article::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'title' => $this->faker->text(10),
+            'body' => $this->faker->text(10),
+         
+        ];
+    }
+
+   
+}
+
+```
+
+Model
+======
+1. Create a model - php artisan make:model Article
+2. Create articles table - run migrations php artisan migrate
+3. run seed data - php artisan db:seed
+4. In SSMS view the articles table to see articles have been created.
+
+Controller
+===========
+1. Make a controller with a resource - php artisan make:controller ArticleController --resource
+
+Documentation
+=============
+
+
+https://laravel.com/docs/7.x/eloquent-resources
