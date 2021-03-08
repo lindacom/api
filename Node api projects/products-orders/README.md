@@ -4,16 +4,24 @@
 4. download node js from nodejs.org then in the directory enter the command npm init (you can enter package name, description entery point index.js
 5. In visual studio code go to file > open folder and open the directory you have created. you will see a package.json file has been created
 
+
+
 dependencies
 -------------
 
-express - a framework for node.js
+express - a framework for node.js. Express router is used for registering different routes and endpoints.
+
+Server - requires app and creates server using app
+app - requires express and contains the routes
+products route uses the products.js file which defines all product routes
 
 6. In visual studio code open a terminal and install express - npm install --save express
 7. In visual stuido code create a new file called server.js.  This file imports the app file. app is also passed to createserver
-8. Create a file called app.js to execute an express application
+8. Create a file called app.js to execute an express application. This file also imports the routes.
 9. run the application - node server.js
 10. open the browser to localhost port 3000 - http://localhost:3000/
+
+N.b. whenever you make a change to files you need to restart the server
 
 
 
