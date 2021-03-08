@@ -73,6 +73,56 @@ Controller
 5. View the resource in app > http > resources
 6. In the controller file use article model and article resource
 
+```
+se App\Http\Requests;
+use App\Article;
+use App\Http\Resources\Article as ArticleResource;
+
+```
+7. Run the application - php artisan serve.  In Postman access a route
+
+In the app > http > resources > article file you can return the resource wth specific fields and metadata
+
+```
+       return [
+        'id' => $this->id,
+        'title' => $this->title,
+        'body' => $this->body
+    ];
+}
+
+public function with($request) {
+    return [
+        'version' => '1.0.0',
+        'author_url' => url('http://traversymedia.com')
+    ];
+}
+```
+
+Add an article
+==============
+1. In postman make a post request to the articles url
+2. go to headers and add content type application/json, go to body and add raw data
+
+```
+{
+    "title" : "test",
+    "body" : "test body"
+}
+```
+
+Update an article
+==================
+1. In postman make a post request to the articles url
+2. go to headers and add content type application/json, go to body and add raw data
+
+{
+    "article_id" : "4",
+    "title" : "update test",
+    "body" : "updated test body"
+}
+
+
 Documentation
 =============
 
