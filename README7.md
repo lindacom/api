@@ -116,5 +116,28 @@ Create a new project called client server. This is a client app to get tokens to
 1. change directory cd ..
 2. enter the command composer create-project --prefer-dist laravel/laravel client-server
 3. go to the client server directory cd ./client server
-4. 
+4. add the composer dependency called Guzzle using the command composer require guzzlehttp/guzzle
+5. create two routes for the client application - redirect url and callback url. In the client server laravel project go to routes > web.php
+6. add code
+7. go to the directory of the laravel api project and run the comand to create a new client php artisan passport:client
+8. assign the client id to the user id 1
+9. enter a client name e.g. client server
+10. enter where you want to redirect request to after authorisation http://127.0.1.1/8001/callback
+11. copy the client secret enerated
+12. In the client server project web.php file in the get/callback route replace the client secret with the copied secret and id
+13. change the client id in the $query = http_build_query section also
+14. open the laravel api project in the browser
+15. open client server project in the browser on port 8001 php artisan serve --port 8001.  go to the url /redirect. Login with details from the database
+
+you will then be redirected to an authorisation request page. (Checking whether client-server should be able to access the account)
+
+16. Click authorise button.
+17. json page is displayed with an access token field to enable access to the api. Copy the access token to enable access to the api Copy the access token.
+exires in field shows how long token will last for.
+18. In the Laravel api project go to app > http > kernel.php file.  In api protected middleware group enter 'auth:api'
+19. In postman make a request that accepts bearer token  paste the token and send request.
+
+build an application that cn access api using bearer token
+
+
 
