@@ -10,3 +10,9 @@ Sql server database.  Users table.
 Install driver
 ---------------
 Install mssql driver using npm command, npm install mssql in the command prompt.
+
+Files
+-----
+server.js
+app.js
+users.js
