@@ -56,6 +56,31 @@ Use a file that specifies various routes:
 const productRoutes = require('./api/routes/products');
  app.use('/products', productRoutes);
  ```
+ 
+ Error handling
+ --------------
+ ```
+ // error handling
+  app.use((req, res, next) => {
+      const error = new Error('Not found');
+      error.status = 404;
+      next(error);
+  })
+
+  // pass in the error
+
+  app.use((error, req, res, next) => {
+      // get the error status or use status 500
+      res.status(error.status || 500);
+      res.json({
+          error: {
+              // return the error message
+              message: error.message
+          }
+      });
+  });
+ ```
+ 
  add this to the end of the file:
  
  module.exports = app;
@@ -95,7 +120,18 @@ Run the application
 12. run the application - node server.js
 13. open the browser to localhost port 3000 - http://localhost:3000/
 
-N.b. whenever you make a change to files you need to restart the server
+N.b. whenever you make a change to files you need to restart the server. Alternatively you can install a package called nodemon to automaticaly 
+restart server when change is made
+
+1. npm install nodemon
+2. in the package.json file add "start": "nodemon server.js" in the scripts section
+3. then to start the application enter npm start in the commandline
+
+logging package for node js 
+
+1. npm install --save morgan 
+2. then add the package to the app file - const morgan = require('morgan'); 
+3. use morgan in the app file - app.use(morgan('dev'));
 
 
 
