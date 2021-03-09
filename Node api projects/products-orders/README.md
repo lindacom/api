@@ -79,7 +79,7 @@ router.get('/:productId', function (req, res) {
         message: 'you passed an id'
     });
 }
- // res.send('Wiki home page');
+
 });
 ```
 
