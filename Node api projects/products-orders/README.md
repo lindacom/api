@@ -81,7 +81,36 @@ const productRoutes = require('./api/routes/products');
   });
  ```
  
- add this to the end of the file:
+ Extract request body
+---------------------
+When user posts a request with json body return the body in the response. 
+
+1. Install package npm install --save body-parser
+2. import body-parser in the app file - const bodyParser = require('body-parser');
+3. Use body parser in the app file 
+
+```
+app.use(bodyParser.urlencoded({etended: false}));
+app.use(bodyParser.json());
+```
+
+4. define body request and response in the router file
+
+```
+router.post('/', function (req, res) {
+    const product = {
+        name: req.body.name,
+        price: req.body.price
+    };
+    res.status(201).json({
+        message: 'handling post requests to /products',
+    // return the body properties
+        createdProduct: product
+    });
+});
+```
+ 
+ add this to the end of the app file:
  
  module.exports = app;
  
@@ -132,6 +161,8 @@ logging package for node js
 1. npm install --save morgan 
 2. then add the package to the app file - const morgan = require('morgan'); 
 3. use morgan in the app file - app.use(morgan('dev'));
+
+
 
 
 
