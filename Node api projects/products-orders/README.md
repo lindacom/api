@@ -1,4 +1,4 @@
-Create a node project
+1. Create a node project
 =======================
 
 1. Open visual studio code and open a terminal and navigate to the required directory
@@ -7,20 +7,23 @@ Create a node project
 4. download node js from nodejs.org then in the directory enter the command npm init (you can enter package name, description entery point index.js
 5. In visual studio code go to file > open folder and open the directory you have created. you will see a package.json file has been created
 
-Add dependencies
+2. Add dependencies
 =================
 
 express - a framework for node.js. Express router is used for registering different routes and endpoints.
+
+In visual studio code open a terminal and install express - npm install --save express
 
 Server - requires app and creates server using app
 app - requires express and contains the routes
 products route uses the products.js file which defines all product routes
 
-6. In visual studio code open a terminal and install express - npm install --save express
+3. Create files
+=============
 
-Create a server
-================
-8. In visual studio code create a new file called server.js.  This file imports the app file and uses port 3000. app is also passed to createserver.
+Server.js
+----------
+In visual studio code create a new file called server.js.  This file imports the app file and uses port 3000. app is also passed to createserver.
 
 ```
 const http = require('http');
@@ -33,16 +36,16 @@ const server = http.createServer(app);
 server.listen(port);
 ```
 
-Create the application
-========================
-10. Create a file called app.js to execute an express application. This file also imports the dependencies and routes.
+app.js
+-------
+Create a file called app.js to execute an express application. This file also imports the dependencies and routes.
 
 ```
 const express = require('express');
 const app = express();
 ```
 
-Add a get route
+Add a get route for the application:
 
 ```
 app.get('/', function (req, res) {
@@ -57,8 +60,27 @@ const productRoutes = require('./api/routes/products');
  app.use('/products', productRoutes);
  ```
  
+define body request and response in the router file:
+
+```
+router.post('/', function (req, res) {
+    const product = {
+        name: req.body.name,
+        price: req.body.price
+    };
+    res.status(201).json({
+        message: 'handling post requests to /products',
+    // return the body properties
+        createdProduct: product
+    });
+});
+```
+ 
  Error handling
  --------------
+ 
+ In the app.js file enter the following code
+ 
  ```
  // error handling
   app.use((req, res, next) => {
@@ -93,23 +115,6 @@ When user posts a request with json body return the body in the response.
 app.use(bodyParser.urlencoded({etended: false}));
 app.use(bodyParser.json());
 ```
-
-4. define body request and response in the router file
-
-```
-router.post('/', function (req, res) {
-    const product = {
-        name: req.body.name,
-        price: req.body.price
-    };
-    res.status(201).json({
-        message: 'handling post requests to /products',
-    // return the body properties
-        createdProduct: product
-    });
-});
-```
-
 CORS - cross origin resource sharing
 -------------------------------------
 
@@ -139,6 +144,8 @@ app.use((req, res, next) => {
  
 Create routes using express router
 ===================================
+Create a router file. In the router file enter the following:
+
 ```
 var express = require('express');
 var router = express.Router();
