@@ -109,6 +109,29 @@ router.post('/', function (req, res) {
     });
 });
 ```
+
+CORS - cross origin resource sharing
+-------------------------------------
+
+You can disable CORS by sending headers from the server to the client that tells the browser the client can have access.
+
+```
+// CORS request header
+app.use((req, res, next) => {
+    // allows from any origin
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    if (req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE')
+        return res.status(200).json({});
+    }
+    // next stops other routes taking over
+    next();
+});
+```
  
  add this to the end of the app file:
  
