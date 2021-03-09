@@ -1,13 +1,14 @@
+Create a node project
+=======================
+
 1. Open visual studio code and open a terminal and navigate to the required directory
 2. Make a new directory using the command mkdir node-rest-shop
 3. navigate into the directory
 4. download node js from nodejs.org then in the directory enter the command npm init (you can enter package name, description entery point index.js
 5. In visual studio code go to file > open folder and open the directory you have created. you will see a package.json file has been created
 
-
-
-dependencies
--------------
+Add dependencies
+=================
 
 express - a framework for node.js. Express router is used for registering different routes and endpoints.
 
@@ -16,10 +17,77 @@ app - requires express and contains the routes
 products route uses the products.js file which defines all product routes
 
 6. In visual studio code open a terminal and install express - npm install --save express
-7. In visual stuido code create a new file called server.js.  This file imports the app file. app is also passed to createserver
-8. Create a file called app.js to execute an express application. This file also imports the routes.
-9. run the application - node server.js
-10. open the browser to localhost port 3000 - http://localhost:3000/
+
+Create a server
+================
+8. In visual studio code create a new file called server.js.  This file imports the app file and uses port 3000. app is also passed to createserver.
+
+```
+const http = require('http');
+const app = require('./app');
+
+const port = process.env.PORT || 3000;
+
+const server = http.createServer(app);
+
+server.listen(port);
+```
+
+Create the application
+========================
+10. Create a file called app.js to execute an express application. This file also imports the dependencies and routes.
+
+```
+const express = require('express');
+const app = express();
+```
+
+Add a get route
+
+```
+app.get('/', function (req, res) {
+    res.send('Hello world!')
+  });
+```
+
+Use a file that specifies various routes:
+
+```
+const productRoutes = require('./api/routes/products');
+ app.use('/products', productRoutes);
+ ```
+ 
+Create routes using express router
+===================================
+```
+var express = require('express');
+var router = express.Router();
+```
+
+Conditional routes:
+
+```
+router.get('/:productId', function (req, res) {
+    const id = req.params.productId;
+    if(id === 'special') {
+    res.status(200).json({
+        message: 'you discovered the special id',
+        id: id
+    });
+} else {
+    res.status(200).json({
+        message: 'you passed an id'
+    });
+}
+ // res.send('Wiki home page');
+});
+```
+
+
+Run the application
+=======================
+12. run the application - node server.js
+13. open the browser to localhost port 3000 - http://localhost:3000/
 
 N.b. whenever you make a change to files you need to restart the server
 
