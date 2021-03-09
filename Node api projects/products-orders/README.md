@@ -1,6 +1,7 @@
 1. Create a node project
 =======================
 
+
 1. Open visual studio code and open a terminal and navigate to the required directory
 2. Make a new directory using the command mkdir node-rest-shop
 3. navigate into the directory
@@ -170,6 +171,37 @@ router.get('/:productId', function (req, res) {
 });
 ```
 
+Accept uploading an image
+-------------------
+The multer package reads form data request. To accept file upload:
+
+npm install --save multer 
+Import multer in the router file
+
+const multer = require('multer');
+const upload = multer({dest: 'uploads/'});
+
+In the post route pass the file upload as an argument 
+
+```
+router.post('/', upload.single('productImage'), function (req, res) {
+    console.log(req.file);
+    const product = {
+        name: req.body.name,
+        price: req.body.price
+    };
+    res.status(201).json({
+        message: 'handling post requests to /products',
+    // return the body properties
+        createdProduct: product
+    });
+});
+```
+An uploads folder will be created.
+start the server - npm start
+In postman make a post request using body form-data and add key value pairs (name, price, productImage (hover over the key field and select file from the dropdown 
+and upload a file.)
+
 add this to the end of the file:
 
 module.exports = router;
@@ -192,8 +224,18 @@ logging package for node js
 2. then add the package to the app file - const morgan = require('morgan'); 
 3. use morgan in the app file - app.use(morgan('dev'));
 
+Authentiction
+--------------
+Client sends auth data to the server (e.g. email)
+Server stores or checks data in the database.  Server returns token
+Client can store the token and use it for future requests
 
+a token is json data about the user (e.g. id) and a signature. Signaure can be verified on the server. N.b. token is not encryted
 
+To add authentiction you need users. model
+create login and signup routes and import the user model
+
+node.bycrypt package for hashing passwords
 
 
 Tutorial
