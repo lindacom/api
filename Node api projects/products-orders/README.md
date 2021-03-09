@@ -56,6 +56,9 @@ Use a file that specifies various routes:
 const productRoutes = require('./api/routes/products');
  app.use('/products', productRoutes);
  ```
+ add this to the end of the file:
+ 
+ module.exports = app;
  
 Create routes using express router
 ===================================
@@ -83,6 +86,9 @@ router.get('/:productId', function (req, res) {
 });
 ```
 
+add this to the end of the file:
+
+module.exports = router;
 
 Run the application
 =======================
