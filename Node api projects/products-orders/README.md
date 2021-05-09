@@ -1,20 +1,25 @@
 1. Create a node project
-=======================
+===========================
 
+1. Open visual studio code. Open a terminal and navigate to the required directory (e.g desktop)
+2. Make a new directory using the command mkdir <directoryname>
+3. download node js from nodejs.org
 
-1. Open visual studio code and open a terminal and navigate to the required directory
-2. Make a new directory using the command mkdir node-rest-shop
-3. navigate into the directory
-4. download node js from nodejs.org then in the directory enter the command npm init (you can enter package name, description entery point index.js
-5. In visual studio code go to file > open folder and open the directory you have created. you will see a package.json file has been created
+In the commandline:
+4. navigate into the directory you just created and enter the command npm init (you can enter package name, description entery point - index.js
+
+In visual studio code: 
+7. go to file > open folder and open the directory you have created. N.b. you will see a package.json file has been created
 
 2. Add dependencies
 =================
 
 express - a framework for node.js. Express router is used for registering different routes and endpoints.
 
-In visual studio code open a terminal and install express - npm install --save express
+In visual studio code open a terminal and install express - enter the command npm install --save express
 
+Files
+========
 Server - requires app and creates server using app
 app - requires express and contains the routes
 products route uses the products.js file which defines all product routes
